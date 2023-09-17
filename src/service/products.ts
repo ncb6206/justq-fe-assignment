@@ -1,14 +1,19 @@
-import { PageParams } from '../types/product';
+import { IPageParams } from '../types/product';
 import instance from './config';
 
-export const GET = async ({ limit, page }: PageParams) => {
+export const GET = async ({ type, limit, page }: IPageParams) => {
   try {
+    const actPage = page ?? 0;
+    const actLimit = limit ?? 0;
     const response = await instance.get(`/`);
     console.log(
       response.data,
-      response.data.slice(page * limit, (page + 1) * limit),
+      response.data.slice(actPage * actLimit, (actPage + 1) * actLimit),
     );
-    return response.data.slice(page * limit, (page + 1) * limit);
+
+    if (type === 'length') return response.data.length;
+
+    return response.data.slice(actPage * actLimit, (actPage + 1) * actLimit);
   } catch (error) {
     return error;
   }
