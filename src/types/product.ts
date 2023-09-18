@@ -17,3 +17,8 @@ export interface IPageParams {
   pageSize?: number;
   currentPage?: number;
 }
+
+export interface IPaginationDivProps {
+  page: number;
+  currentPage: number;
+}

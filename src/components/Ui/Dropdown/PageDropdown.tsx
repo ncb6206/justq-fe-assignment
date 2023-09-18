@@ -1,4 +1,4 @@
-import { useEffect, ChangeEvent } from 'react';
+import { useEffect, ChangeEvent, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import usePageStore from '../../../stores/pageStore';
@@ -8,8 +8,8 @@ const PageDropdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const pageSizes = useMemo(() => [5, 10, 30, 50, 100], []);
   const pageSize = usePageStore(state => state.pageSize);
-  const pageSizes = [5, 10, 30, 50, 100];
 
   const onChangePageSize = (event: ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(location.search);
@@ -23,8 +23,15 @@ const PageDropdown = () => {
     const params = new URLSearchParams(location.search);
     const size = params.get('size');
 
-    if (size) usePageStore.setState({ pageSize: Number(size) });
-  }, [location.search]);
+    if (!size || isNaN(Number(size))) {
+      usePageStore.setState({ pageSize: 10 });
+      return;
+    }
+
+    if (pageSizes.includes(Number(size))) {
+      usePageStore.setState({ pageSize: Number(size) });
+    }
+  }, [location.search, pageSizes]);
 
   return (
     <>

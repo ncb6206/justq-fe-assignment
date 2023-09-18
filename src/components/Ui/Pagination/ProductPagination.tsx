@@ -7,8 +7,9 @@ import {
   DoubleRightOutlined,
 } from '@ant-design/icons';
 import usePageStore from '../../../stores/pageStore';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { IPaginationDivProps } from '../../../types/product';
 
 const ProductPagination = () => {
   const navigate = useNavigate();
@@ -49,27 +50,39 @@ const ProductPagination = () => {
     const params = new URLSearchParams(location.search);
     const page = params.get('page');
 
-    if (page) usePageStore.setState({ currentPage: Number(page) });
+    if (!page || isNaN(Number(page))) {
+      console.error('Invalid page value:', page);
+      return;
+    }
+
+    if (Number(page) > 0) {
+      usePageStore.setState({ currentPage: Number(page) });
+    }
   }, [location.search]);
 
   return (
     <ProductPaginationDiv>
-      <div onClick={goFirstPage}>
+      <PaginationButton onClick={goFirstPage}>
         <DoubleLeftOutlined />
-      </div>
-      <div onClick={decreasePage}>
+      </PaginationButton>
+      <PaginationButton onClick={decreasePage}>
         <LeftOutlined />
-      </div>
-
+      </PaginationButton>
       {pageArray.map(page => (
-        <div onClick={() => clickPage(page)}>{page}</div>
+        <PaginationDiv
+          onClick={() => clickPage(page)}
+          page={page}
+          currentPage={currentPage}
+        >
+          {page}
+        </PaginationDiv>
       ))}
-      <div onClick={increasePage}>
+      <PaginationButton onClick={increasePage}>
         <RightOutlined />
-      </div>
-      <div onClick={goLastPage}>
+      </PaginationButton>
+      <PaginationButton onClick={goLastPage}>
         <DoubleRightOutlined />
-      </div>
+      </PaginationButton>
     </ProductPaginationDiv>
   );
 };
@@ -79,8 +92,47 @@ const ProductPaginationDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 1rem;
   margin: 1rem 0;
+`;
+
+const Paginate = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 29px;
+  height: 29px;
+  margin: 0 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    color: #df1b1b;
+  }
+`;
+
+const PaginationButton = styled(Paginate)`
+  border: 1px solid #bbb;
+`;
+
+const PaginationDiv = styled(Paginate)<IPaginationDivProps>`
+  font-size: 1.2rem;
+  font-weight: 600;
+  user-select: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  ${props =>
+    props.page === props.currentPage &&
+    css`
+      border: 1px solid #0073e9;
+      color: #0073e9;
+
+      &:hover {
+        color: #0073e9;
+        text-decoration: underline;
+      }
+    `}
 `;
 
 export default ProductPagination;
