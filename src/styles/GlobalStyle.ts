@@ -18,8 +18,8 @@ const GlobalStyle = createGlobalStyle`
     }
     body{
         line-height: 1;
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #F6F9F0;
+        font-family: 'Nanum Gothic', 'Noto Sans KR', sans-serif;
+        background-color: #F4F3EA;
         margin-bottom: 100px;
         line-height: 1.5;
         font-weight: 400;
