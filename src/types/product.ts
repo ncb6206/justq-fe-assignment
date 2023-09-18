@@ -14,15 +14,6 @@ export interface IProductType {
 
 export interface IPageParams {
   type: 'length' | 'data';
-  limit?: number;
-  page?: number;
-}
-export interface IProductListItem {
-  currentPage: number;
-  pageSizes: number;
-}
-
-export interface IPagination extends IProductListItem {
-  onShowSizeChange: (current: number, size: number) => void;
-  pageLength: number;
+  pageSize?: number;
+  currentPage?: number;
 }

@@ -1,21 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { GET } from '../../service/products';
-import { IProductListItem, IProductType } from '../../types/product';
+import { IProductType } from '../../types/product';
 import ProductListItem from '../Item/ProductListItem';
+import usePageStore from '../../stores/pageStore';
 
-const ProductList = ({ currentPage, pageSizes }: IProductListItem) => {
+const ProductList = () => {
   const [productList, setProductList] = useState<IProductType[]>([]);
+  const { currentPage, pageSize } = usePageStore(state => state);
 
   const getProducts = useCallback(async () => {
     const response = await GET({
       type: 'data',
-      limit: pageSizes,
-      page: currentPage,
+      pageSize,
+      currentPage,
     });
     setProductList(response);
     // console.log(productList);
-  }, [currentPage, pageSizes]);
+  }, [currentPage, pageSize]);
 
   useEffect(() => {
     getProducts();
