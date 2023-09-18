@@ -11,11 +11,12 @@ const Layout = () => {
 
 const Wrap = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 5rem;
 `;
 
 export default Layout;

@@ -32,6 +32,9 @@ const GlobalStyle = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    html,body{
+        height: 100%;
+    }
 `;
 
 export default GlobalStyle;

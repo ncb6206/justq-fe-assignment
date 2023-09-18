@@ -1,6 +1,6 @@
-import { ProductType } from '../../types/product';
+import { IProductType } from '../../types/product';
 
-const ProductListItem = ({ product }: { product: ProductType }) => {
+const ProductListItem = ({ product }: { product: IProductType }) => {
   return (
     <div>
       {product.product_name} {product.price}원

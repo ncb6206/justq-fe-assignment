@@ -1,4 +1,4 @@
-export interface ProductType {
+export interface IProductType {
   id: string;
   category_code: string;
   status: string;
@@ -12,7 +12,8 @@ export interface ProductType {
   keywords: string[];
 }
 
-export interface PageParams {
-  limit: number;
-  page: number;
+export interface IPageParams {
+  type: 'length' | 'data';
+  pageSize?: number;
+  currentPage?: number;
 }

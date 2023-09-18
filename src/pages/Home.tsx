@@ -1,30 +1,44 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GET } from '../service/products';
+
 import ProductList from '../components/List/ProductList';
-import Pagination from '../components/Pagination/Pagination';
-import { ProductType } from '../types/product';
+import styled from 'styled-components';
+import ProductPagination from '../components/Ui/Pagination/ProductPagination';
+import usePageStore from '../stores/pageStore';
+import PageDropdown from '../components/Ui/Dropdown/PageDropdown';
 
 const HomePage = () => {
-  // const [currentPage, setCurrentPage] = useState(0);
-  // const [pageSize, setPageSize] = useState(5);
-  const [productList, setProductList] = useState<ProductType[]>([]);
-
-  const getProducts = async () => {
-    const response = await GET({ limit: 10, page: 0 });
-    setProductList(response);
-    // console.log(productList);
+  const getLength = async () => {
+    const response = await GET({ type: 'length' });
+    usePageStore.setState({ listLength: response });
   };
 
   useEffect(() => {
-    getProducts();
+    getLength();
   }, []);
 
   return (
-    <div>
-      <ProductList productList={productList} />
-      <Pagination />
-    </div>
+    <HomeDiv>
+      <HomeHeader>
+        <p>상품 목록</p>
+        <PageDropdown />
+      </HomeHeader>
+      <ProductList />
+      <ProductPagination />
+    </HomeDiv>
   );
 };
+
+const HomeDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const HomeHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+`;
 
 export default HomePage;
