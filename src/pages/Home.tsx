@@ -1,29 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GET } from '../service/products';
 
 import ProductList from '../components/List/ProductList';
-import type { PaginationProps } from 'antd';
 import styled from 'styled-components';
-import ProductPagination from '../components/Pagination/ProductPagination';
+import ProductPagination from '../components/Ui/Pagination/ProductPagination';
+import usePageStore from '../stores/pageStore';
+import PageDropdown from '../components/Ui/Dropdown/PageDropdown';
 
 const HomePage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [pageSizes, setPageSizes] = useState(10);
-  const [pageLength, setPageLength] = useState(0);
-
-  const onShowSizeChange: PaginationProps['onShowSizeChange'] = (
-    current,
-    pageSize,
-  ) => {
-    setCurrentPage(current);
-    setPageSizes(pageSizes);
-    console.log(current, pageSize, currentPage, pageSizes);
-  };
-
   const getLength = async () => {
     const response = await GET({ type: 'length' });
-    setPageLength(response);
-    // console.log(productList);
+    usePageStore.setState({ listLength: response });
   };
 
   useEffect(() => {
@@ -34,14 +21,10 @@ const HomePage = () => {
     <HomeDiv>
       <HomeHeader>
         <p>상품 목록</p>
+        <PageDropdown />
       </HomeHeader>
-      <ProductList currentPage={currentPage} pageSizes={pageSizes} />
-      <ProductPagination
-        onShowSizeChange={onShowSizeChange}
-        pageLength={pageLength}
-        currentPage={currentPage}
-        pageSizes={pageSizes}
-      />
+      <ProductList />
+      <ProductPagination />
     </HomeDiv>
   );
 };
