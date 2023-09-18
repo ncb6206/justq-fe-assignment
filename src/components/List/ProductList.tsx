@@ -4,6 +4,7 @@ import { GET } from '../../service/products';
 import { IProductType } from '../../types/product';
 import ProductListItem from '../Item/ProductListItem';
 import usePageStore from '../../stores/pageStore';
+import styled from 'styled-components';
 
 const ProductList = () => {
   const [productList, setProductList] = useState<IProductType[]>([]);
@@ -24,12 +25,17 @@ const ProductList = () => {
   }, [getProducts]);
 
   return (
-    <div>
+    <ProductListDiv>
       {productList.map(product => (
         <ProductListItem key={product.id} product={product} />
       ))}
-    </div>
+    </ProductListDiv>
   );
 };
+
+const ProductListDiv = styled.div`
+  width: 100%;
+  margin: 1rem 0;
+`;
 
 export default ProductList;
