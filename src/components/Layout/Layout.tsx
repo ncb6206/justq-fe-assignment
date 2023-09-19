@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from '../Header/Header';
 
 const Layout = () => {
   return (
     <Wrap>
+      <Header />
       <Outlet />
     </Wrap>
   );
@@ -16,7 +18,6 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
 `;
 
 export default Layout;
