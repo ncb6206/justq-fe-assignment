@@ -3,30 +3,31 @@ import { create } from 'zustand';
 const usePageStore = create<IPageState>(set => ({
   listLength: 0,
   pageLength: 0,
-  currentPage: 1,
-  pageSize: 10,
+  currentpage: 1,
+  pagesize: 10,
+  isLoading: false,
   pageArray: [],
   increasePage: () =>
     set(state => {
-      if (state.currentPage < state.pageLength) {
-        return { currentPage: state.currentPage + 1 };
+      if (state.currentpage < state.pageLength) {
+        return { currentpage: state.currentpage + 1 };
       }
       return state;
     }),
   decreasePage: () =>
     set(state => {
-      if (state.currentPage > 1) {
-        return { currentPage: state.currentPage - 1 };
+      if (state.currentpage > 1) {
+        return { currentpage: state.currentpage - 1 };
       }
       return state;
     }),
-  goFirstPage: () => set({ currentPage: 1 }),
-  goLastPage: () => set(state => ({ currentPage: state.pageLength })),
-  clickPage: (value: number) => set({ currentPage: value }),
+  goFirstPage: () => set({ currentpage: 1 }),
+  goLastPage: () => set(state => ({ currentpage: state.pageLength })),
+  clickPage: (value: number) => set({ currentpage: value }),
   generatePageNumbers: () =>
     set(state => {
       const pageRange = 2;
-      let startPage = Math.max(1, state.currentPage - pageRange);
+      let startPage = Math.max(1, state.currentpage - pageRange);
       let endPage = startPage + pageRange * 2;
 
       if (endPage > state.pageLength) {
@@ -47,8 +48,9 @@ const usePageStore = create<IPageState>(set => ({
 interface IPageState {
   listLength: number;
   pageLength: number;
-  currentPage: number;
-  pageSize: number;
+  currentpage: number;
+  pagesize: number;
+  isLoading: boolean;
   pageArray: number[];
   increasePage: () => void;
   decreasePage: () => void;

@@ -14,6 +14,11 @@ export interface IProductType {
 
 export interface IPageParams {
   type: 'length' | 'data';
-  pageSize?: number;
-  currentPage?: number;
+  pagesize?: number;
+  currentpage?: number;
+}
+
+export interface IPaginationDivProps {
+  page: number;
+  currentpage: number;
 }
