@@ -18,8 +18,8 @@ const ProductPagination = () => {
   const {
     listLength,
     pageLength,
-    currentPage,
-    pageSize,
+    currentpage,
+    pagesize,
     pageArray,
     increasePage,
     decreasePage,
@@ -30,33 +30,32 @@ const ProductPagination = () => {
   } = usePageStore(state => state);
 
   useEffect(() => {
-    usePageStore.setState({ pageLength: Math.ceil(listLength / pageSize) });
+    usePageStore.setState({ pageLength: Math.ceil(listLength / pagesize) });
 
-    if (currentPage && pageLength && currentPage > pageLength) {
-      console.log(currentPage, pageLength);
-      usePageStore.setState({ currentPage: pageLength });
+    if (currentpage && pageLength && currentpage > pageLength) {
+      usePageStore.setState({ currentpage: pageLength });
     }
-  }, [pageLength, pageSize, currentPage, listLength]);
+  }, [pageLength, pagesize, currentpage, listLength]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    params.set('page', String(currentPage));
+    const page = params.get('page');
+    params.set('page', String(currentpage));
 
     generatePageNumbers();
-    navigate(`?${params.toString()}`);
-  }, [currentPage, generatePageNumbers, location.search, navigate, pageLength]);
+    if (!page && currentpage == 1) return;
+
+    return navigate(`?${params.toString()}`);
+  }, [currentpage, generatePageNumbers, location.search, navigate, pageLength]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const page = params.get('page');
 
-    if (!page || isNaN(Number(page))) {
-      console.error('Invalid page value:', page);
-      return;
-    }
+    if (!page || isNaN(Number(page))) return;
 
     if (Number(page) > 0) {
-      usePageStore.setState({ currentPage: Number(page) });
+      usePageStore.setState({ currentpage: Number(page) });
     }
   }, [location.search]);
 
@@ -71,8 +70,9 @@ const ProductPagination = () => {
       {pageArray.map(page => (
         <PaginationDiv
           onClick={() => clickPage(page)}
+          key={page}
           page={page}
-          currentPage={currentPage}
+          currentpage={currentpage}
         >
           {page}
         </PaginationDiv>
@@ -111,6 +111,7 @@ const Paginate = styled.div`
 
 const PaginationButton = styled(Paginate)`
   border: 1px solid #bbb;
+  user-select: none;
 `;
 
 const PaginationDiv = styled(Paginate)<IPaginationDivProps>`
@@ -123,7 +124,7 @@ const PaginationDiv = styled(Paginate)<IPaginationDivProps>`
   }
 
   ${props =>
-    props.page === props.currentPage &&
+    props.page === props.currentpage &&
     css`
       border: 1px solid #0073e9;
       color: #0073e9;
