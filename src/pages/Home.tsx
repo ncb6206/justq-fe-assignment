@@ -5,7 +5,7 @@ import ProductList from '../components/List/ProductList';
 import styled from 'styled-components';
 import ProductPagination from '../components/Ui/Pagination/ProductPagination';
 import usePageStore from '../stores/pageStore';
-import PageDropdown from '../components/Ui/Dropdown/PageDropdown';
+import PageComboBox from '../components/Ui/ComboBox/PageComboBox';
 
 const HomePage = () => {
   const getLength = async () => {
@@ -21,7 +21,7 @@ const HomePage = () => {
     <HomeDiv>
       <HomeHeader>
         <span>상품 목록</span>
-        <PageDropdown />
+        <PageComboBox />
       </HomeHeader>
       <ProductList />
       <ProductPagination />
