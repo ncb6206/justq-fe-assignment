@@ -23,11 +23,12 @@ const Main = styled.main`
   letter-spacing: 1px;
 
   > h1 {
-    font-size: 32px;
+    font-size: 60px;
     cursor: pointer;
   }
 
   > p {
+    font-size: 20px;
     font-weight: 300;
   }
 `;
