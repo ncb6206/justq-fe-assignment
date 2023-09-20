@@ -14,6 +14,8 @@ import { IPaginationDivProps } from '../../../types/product';
 const ProductPagination = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const page = params.get('page');
 
   const {
     listLength,
@@ -30,34 +32,33 @@ const ProductPagination = () => {
   } = usePageStore(state => state);
 
   useEffect(() => {
-    usePageStore.setState({ pageLength: Math.ceil(listLength / pagesize) });
-
-    if (currentpage && pageLength && currentpage > pageLength) {
-      usePageStore.setState({ currentpage: pageLength });
-    }
-  }, [pageLength, pagesize, currentpage, listLength]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const page = params.get('page');
-    params.set('page', String(currentpage));
+    const calPageLength = Math.ceil(listLength / pagesize);
+    usePageStore.setState({ pageLength: calPageLength });
 
     generatePageNumbers();
-    if (!page && currentpage == 1) return;
 
-    return navigate(`?${params.toString()}`);
-  }, [currentpage, generatePageNumbers, location.search, navigate, pageLength]);
+    if (currentpage && calPageLength && currentpage > calPageLength) {
+      usePageStore.setState({ currentpage: calPageLength });
+    }
+  }, [currentpage, pageLength, pagesize, listLength, generatePageNumbers]);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const page = params.get('page');
-
     if (!page || isNaN(Number(page))) return;
 
     if (Number(page) > 0) {
       usePageStore.setState({ currentpage: Number(page) });
     }
-  }, [location.search]);
+  }, [page]);
+
+  useEffect(() => {
+    params.set('page', String(currentpage));
+
+    if (!page && currentpage == 1) return;
+
+    navigate(`?${params.toString()}`);
+    // params와 page를 의존성 배열에 추가하면 뒤로가기가 안되기 때문에 주석 처리
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentpage, navigate]);
 
   return (
     <ProductPaginationDiv>
