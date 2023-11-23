@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { IProductType } from '../../types/product';
 
 const ProductListItem = ({ product }: { product: IProductType }) => {
+  const searchGoogle = (productName: string) => {
+    const url = `https://www.google.com/search?q=${productName}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <ProductListItemDiv>
       <ProductListItemImgDiv>
@@ -19,7 +24,9 @@ const ProductListItem = ({ product }: { product: IProductType }) => {
             {product.brand && product.model && <span> | </span>}
             {product.model && <span>model : {product?.model}</span>}
           </HeaderBadge>
-          <ProductName>{product?.product_name}</ProductName>
+          <ProductName onClick={() => searchGoogle(product?.product_name)}>
+            {product?.product_name}
+          </ProductName>
         </DetailHeader>
         <DetailBottom>
           <PriceSpan>
