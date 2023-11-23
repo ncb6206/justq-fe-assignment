@@ -10,7 +10,10 @@ import PageComboBox from '../components/Ui/ComboBox/PageComboBox';
 const HomePage = () => {
   const getLength = async () => {
     const response = await GET({ type: 'length' });
-    usePageStore.setState({ listLength: response });
+
+    if (response.length !== 0) {
+      usePageStore.setState({ listLength: response });
+    }
   };
 
   useEffect(() => {

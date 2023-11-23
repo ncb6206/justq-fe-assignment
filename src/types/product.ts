@@ -6,10 +6,10 @@ export interface IProductType {
   product_name: string;
   price: string;
   main_image: string;
-  origin: string;
-  brand: string;
-  model: string;
-  keywords: string[];
+  origin?: string;
+  brand?: string;
+  model?: string;
+  keywords?: string[];
 }
 
 export interface IPageParams {
