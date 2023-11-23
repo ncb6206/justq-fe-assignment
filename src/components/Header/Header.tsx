@@ -29,6 +29,7 @@ const Span = styled.span`
   font-family: 'Montserrat', sans-serif;
   color: #ffffff;
   font-size: 8rem;
+  user-select: none;
 `;
 
 export default Header;
