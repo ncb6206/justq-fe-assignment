@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <HeaderDiv>
       <SpanDiv>
-        <Span>JustQ Shop</Span>
+        <Span>Natest Shop</Span>
       </SpanDiv>
     </HeaderDiv>
   );
