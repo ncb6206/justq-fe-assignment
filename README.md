@@ -80,7 +80,7 @@
 
 | 데모영상      |       
 | ------------ | 
-| <img width=600 src="https://github.com/wanted-pre-onboarding-team12/pre-onboarding-11th-3-12/assets/62326659/ee9b582d-7b19-42a8-a6f4-8e622e1996f8"/> | 
+| <img width=600 src="https://github.com/ncb6206/natest-shop/assets/62326659/52d5614d-0cde-4798-8a96-4658f6dc903e"/> | 
 
 - **주변 페이지 번호 계산** : **현재 페이지 번호를 기준으로 주변 번호를 계산해 배열을 생성**하였습니다(예: 현재 3페이지면 `[1,2,3,4,5]` 배열 반환). 이 기능은 사용자가 현재 페이지 주변의 번호를 클릭해 **직접 원하는 페이지로 이동**이 가능하도록 구현하였습니다. <br><br>
 - **직전/직후 페이지 이동 버튼 구현** : 현재 페이지를 기준으로 직전 페이지와 직후 페이지로 네비게이션 할 수 있는 버튼을 구현하였습니다. <br><br>
@@ -94,7 +94,7 @@
 
 | 데모영상      |       
 | ------------ | 
-| <img width=600 src="https://github.com/wanted-pre-onboarding-team12/pre-onboarding-11th-3-12/assets/62326659/a347415f-50fa-4110-8c01-8b1773f93dc1"/> | 
+| <img width=600 src="https://github.com/ncb6206/natest-shop/assets/62326659/64b9649b-b360-4dcc-a589-5c7504ea6f9d"/> | 
 
 - **제한된 페이지 사이즈 선택** : 사용자가 페이지 사이즈를 임의로 지정하는 것은 허용하지 않고, **사전에 지정된 수(예: 5,10,30,50,100) 중에서만 선택하여 페이지 사이즈를 변경**할 수 있도록 구현하였습니다. <br><br>
 - **검색 기능 추가** : 사용자가 편리하게 원하는 수치를 찾을 수 있도록 **검색 기능을 추가하여 지정된 페이지 사이즈들 중에서 선택**할 수 있게 구현하였습니다. <br><br>
@@ -106,7 +106,7 @@
 
 | 데모영상      |       
 | ------------ | 
-| <img width=600 src="https://github.com/wanted-pre-onboarding-team12/pre-onboarding-11th-3-12/assets/62326659/e4abe070-4a7f-42a8-b88a-4a253a7e39b2"/> | 
+| <img width=600 src="https://github.com/ncb6206/natest-shop/assets/62326659/67a12940-e6a9-4631-bd00-ea2ec2a61108"/> | 
 
 - **URL을 통한 페이지 정보 저장 및 유지** : `URLSearchParams`와 `React Router`의 `useLocation` 기능을 활용하여, **페이지 사이즈와 현재 페이지 정보를 URL에 저장**하였습니다. 이렇게 함으로써 사용자가 새로고침을 해도 동일한 페이지 상태를 유지할 수 있도록 구현하였습니다. <br><br>
 
@@ -118,7 +118,7 @@
 
 | 데모영상          |       
 | ------------ | 
-| <img width=600 src="https://github.com/wanted-pre-onboarding-team12/pre-onboarding-11th-3-12/assets/62326659/89bc6614-3fb5-4759-a878-cbab82e6d3b6"/> | 
+| <img width=600 src="https://github.com/ncb6206/natest-shop/assets/62326659/e7da7652-48db-45a3-98d1-80fdd7c315db"/> | 
 
 - **에러창 표시** : 라우팅을 관리하는 컴포넌트 내의 `<Route path="/*" element={<NotFoundPage />} />` 코드를 통해 구현되었습니다. 이 코드는 **모든 유효하지 않은 경로에 대해 NotFoundPage 컴포넌트를 반환**하도록 설계하였습니다.
 <br><br>
@@ -131,7 +131,7 @@
 
 | 데모영상        | 
 | --------------- | 
-| <img width=600 src="https://github.com/wanted-pre-onboarding-team12/pre-onboarding-11th-3-12/assets/62326659/8fc82b81-2168-41de-acc5-defe128a2c3e"/> | 
+| <img width=600 src="https://github.com/ncb6206/natest-shop/assets/62326659/ee8abf1c-0d97-4e1b-8864-544b9bbb6292"/> | 
 
 - **로딩 상태 관리** : `isLoading` 변수를 사용하여 로딩 상태를 관리하였습니다. 이를 통해 **상품 목록을 불러오는 동안에는 로딩 컴포넌트가 화면에 표시**되도록 구현하였습니다.
 
