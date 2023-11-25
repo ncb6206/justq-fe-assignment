@@ -5,7 +5,6 @@ const usePageStore = create<IPageState>(set => ({
   pageLength: 0,
   currentpage: 1,
   pagesize: 10,
-  isLoading: false,
   pageArray: [],
   increasePage: () =>
     set(state => {
@@ -50,7 +49,6 @@ interface IPageState {
   pageLength: number;
   currentpage: number;
   pagesize: number;
-  isLoading: boolean;
   pageArray: number[];
   increasePage: () => void;
   decreasePage: () => void;

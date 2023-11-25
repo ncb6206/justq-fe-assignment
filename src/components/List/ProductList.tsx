@@ -1,32 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import styled from 'styled-components';
 
 import { GET } from '../../service/products';
 import { IProductType } from '../../types/product';
 import ProductListItem from '../Item/ProductListItem';
 import usePageStore from '../../stores/pageStore';
-import styled from 'styled-components';
 import Loading from '../Ui/Loading/Loading';
 
 const ProductList = () => {
-  const [productList, setProductList] = useState<IProductType[]>([]);
-  const { currentpage, pagesize, isLoading } = usePageStore(state => state);
-
-  const getProducts = useCallback(async () => {
-    usePageStore.setState({ isLoading: true });
-
-    const response = await GET({
-      type: 'data',
-      pagesize,
-      currentpage,
-    });
-    setProductList(response);
-
-    usePageStore.setState({ isLoading: false });
-  }, [currentpage, pagesize]);
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+  const { currentpage, pagesize } = usePageStore(state => state);
+  const { data, isLoading } = useQuery({
+    queryKey: ['getProducts', pagesize, currentpage],
+    queryFn: () =>
+      GET({
+        type: 'data',
+        pagesize,
+        currentpage,
+      }),
+  });
 
   return (
     <ProductListDiv>
@@ -35,7 +26,7 @@ const ProductList = () => {
           <Loading />
         </LoadingDiv>
       ) : (
-        productList?.map(product => (
+        data?.map((product: IProductType) => (
           <ProductListItem key={product.id} product={product} />
         ))
       )}
