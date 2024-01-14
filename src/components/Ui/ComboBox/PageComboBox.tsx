@@ -9,7 +9,7 @@ const PageComboBox = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const pageSizes = useMemo(() => ['5', '10', '30', '50', '100'], []);
+  const pageSizes = useMemo(() => ['15', '30', '50', '100'], []);
   const pageSizesObject = useMemo(
     () => pageSizes.map(value => ({ value: value, label: value })),
     [pageSizes],
@@ -34,7 +34,7 @@ const PageComboBox = () => {
     const size = params.get('size');
 
     if (!size || isNaN(Number(size))) {
-      usePageStore.setState({ pagesize: 10 });
+      usePageStore.setState({ pagesize: 15 });
       return;
     }
 
