@@ -1,15 +1,18 @@
 export interface IProductType {
-  id: string;
-  category_code: string;
-  status: string;
-  owner_product_code: string;
-  product_name: string;
-  price: string;
-  main_image: string;
-  origin?: string;
-  brand?: string;
-  model?: string;
-  keywords?: string[];
+  title: string;
+  link: string;
+  image: string;
+  lprice: string;
+  hprice?: string;
+  mallName: string;
+  productId: string;
+  productType: string;
+  brand: string;
+  maker: string;
+  category1?: string;
+  category2?: string;
+  category3?: string;
+  category4?: string;
 }
 
 export interface IPageParams {
