@@ -1,38 +1,41 @@
 import styled from 'styled-components';
 import { IProductType } from '../../types/product';
 
-const ProductListItem = ({ product }: { product: IProductType }) => {
-  const searchGoogle = (productName: string) => {
-    const url = `https://www.google.com/search?q=${productName}`;
-    window.open(url, '_blank');
+interface IProductListItemProps {
+  product: IProductType;
+}
+
+const ProductListItem = ({ product }: IProductListItemProps) => {
+  const searchGoogle = (productUrl: string) => {
+    window.open(productUrl, '_blank');
   };
 
   return (
     <ProductListItemDiv>
       <ProductListItemImgDiv>
-        <img src={product?.main_image} />
+        <img src={product?.image} />
       </ProductListItemImgDiv>
       <ProductListItemDetailDiv>
         <DetailHeader>
           <HeaderBadge>
-            {product.origin && <span>origin : {product?.origin}</span>}
-            {product.origin && product.brand && <span> | </span>}
+            {product.category2 && <span>origin : {product?.category2}</span>}
+            {product.category3 && product.brand && <span> | </span>}
             {product.brand && <span>brand : {product?.brand}</span>}
-            {!product.brand && product.origin && product.model && (
+            {!product.brand && product.category3 && product.category3 && (
               <span> | </span>
             )}
-            {product.brand && product.model && <span> | </span>}
-            {product.model && <span>model : {product?.model}</span>}
+            {product.brand && product.category4 && <span> | </span>}
+            {product.category4 && <span>model : {product?.category4}</span>}
           </HeaderBadge>
-          <ProductName onClick={() => searchGoogle(product?.product_name)}>
-            {product?.product_name}
+          <ProductName onClick={() => searchGoogle(product?.link)}>
+            {product?.title}
           </ProductName>
         </DetailHeader>
         <DetailBottom>
           <PriceSpan>
-            {parseInt(product?.price).toLocaleString('ko-KR')}원
+            {parseInt(product?.lprice).toLocaleString('ko-KR')}원
           </PriceSpan>
-          <CategorySpan>카테고리 : {product?.category_code}</CategorySpan>
+          <CategorySpan>카테고리 : {product?.category1}</CategorySpan>
         </DetailBottom>
       </ProductListItemDetailDiv>
     </ProductListItemDiv>
@@ -40,10 +43,10 @@ const ProductListItem = ({ product }: { product: IProductType }) => {
 };
 
 const ProductListItemDiv = styled.div`
-  height: 70px;
   display: flex;
   position: relative;
-  padding: 0 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 1px solid #ddd;
 
   &:hover {
     background-color: #eeeeee;
@@ -79,8 +82,6 @@ const ProductListItemDetailDiv = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: center;
-  border-bottom: 1px solid #ddd;
-  overflow: hidden;
 `;
 
 const DetailHeader = styled.div``;
