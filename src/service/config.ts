@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '/db.json',
   timeout: 5000,
   headers: {
     Accept: 'application/json',
