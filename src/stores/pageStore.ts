@@ -1,10 +1,24 @@
 import { create } from 'zustand';
 
+interface IPageState {
+  listLength: number;
+  pageLength: number;
+  currentpage: number;
+  pagesize: number;
+  pageArray: number[];
+  increasePage: () => void;
+  decreasePage: () => void;
+  goFirstPage: () => void;
+  goLastPage: () => void;
+  clickPage: (value: number) => void;
+  generatePageNumbers: () => void;
+}
+
 const usePageStore = create<IPageState>(set => ({
   listLength: 0,
   pageLength: 0,
   currentpage: 1,
-  pagesize: 10,
+  pagesize: 15,
   pageArray: [],
   increasePage: () =>
     set(state => {
@@ -43,19 +57,5 @@ const usePageStore = create<IPageState>(set => ({
       return { pageArray: pageNumbers };
     }),
 }));
-
-interface IPageState {
-  listLength: number;
-  pageLength: number;
-  currentpage: number;
-  pagesize: number;
-  pageArray: number[];
-  increasePage: () => void;
-  decreasePage: () => void;
-  goFirstPage: () => void;
-  goLastPage: () => void;
-  clickPage: (value: number) => void;
-  generatePageNumbers: () => void;
-}
 
 export default usePageStore;
