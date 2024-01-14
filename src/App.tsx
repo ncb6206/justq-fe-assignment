@@ -13,6 +13,7 @@ function App() {
             refetchOnWindowFocus: false,
             retry: false,
             staleTime: 60 * 1000,
+            gcTime: 60 * 1000 * 5,
           },
         },
       }),
