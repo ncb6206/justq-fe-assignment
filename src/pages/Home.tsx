@@ -1,21 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
-import { GET } from '../service/products';
+// import { GET } from '../service/products';
 import ProductList from '../components/List/ProductList';
-import ProductPagination from '../components/Ui/Pagination/ProductPagination';
-import usePageStore from '../stores/pageStore';
+// import ProductPagination from '../components/Ui/Pagination/ProductPagination';
+// import usePageStore from '../stores/pageStore';
 import PageComboBox from '../components/Ui/ComboBox/PageComboBox';
 
 const HomePage = () => {
-  const { data } = useQuery({
-    queryKey: ['getProductsLength'],
-    queryFn: () => GET({ type: 'length' }),
-  });
+  // const { data } = useQuery({
+  //   queryKey: ['getProductsLength'],
+  //   queryFn: () => GET({ type: 'length' }),
+  // });
 
-  if (data >= 0) {
-    usePageStore.setState({ listLength: data });
-  }
+  // if (data >= 0) {
+  //   usePageStore.setState({ listLength: data });
+  // }
 
   return (
     <HomeDiv>
@@ -24,7 +24,7 @@ const HomePage = () => {
         <PageComboBox />
       </HomeHeader>
       <ProductList />
-      <ProductPagination />
+      {/* <ProductPagination /> */}
     </HomeDiv>
   );
 };
