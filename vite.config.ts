@@ -8,20 +8,14 @@ export default defineConfig({
       '/v1': {
         target: 'https://openapi.naver.com',
         changeOrigin: true,
-        secure: false,      
+        secure: false,
         ws: true,
       },
     },
   },
   plugins: [react()],
   base: '/natest-shop',
-  build: {
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+  esbuild: {
+    drop: ['console', 'debugger'],
   },
 });
