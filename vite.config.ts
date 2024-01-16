@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   plugins: [react()],
-  base: '/natest-shop',
+  // base: '/natest-shop',
   // esbuild: {
   //   drop: ['console', 'debugger'],
   // },
