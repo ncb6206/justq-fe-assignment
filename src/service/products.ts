@@ -20,6 +20,8 @@ export const GET = async ({ type, pagesize, currentpage }: IPageParams) => {
     //   },
     // });
 
+    console.log(import.meta.env.VITE_PROXY_URL);
+
     const response = await instance.get(import.meta.env.VITE_PROXY_URL, {
       params: {
         query: '신발',
