@@ -20,15 +20,18 @@ export const GET = async ({ type, pagesize, currentpage }: IPageParams) => {
     //   },
     // });
 
-    const response = await instance.get(import.meta.env.VITE_PROXY_URL, {
-      params: {
-        query: '신발',
-        display: actSize,
-        start: actPage,
-        sort: 'sim',
-        filter: 'medium',
+    const response = await instance.get(
+      'https://r1itcy4b28.execute-api.us-east-1.amazonaws.com/default/proxyRewrite',
+      {
+        params: {
+          query: '신발',
+          display: actSize,
+          start: actPage,
+          sort: 'sim',
+          filter: 'medium',
+        },
       },
-    });
+    );
 
     if (type === 'length') return response.data.items.length;
 
