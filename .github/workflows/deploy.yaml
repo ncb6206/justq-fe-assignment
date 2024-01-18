@@ -17,6 +17,10 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: Set Environment Variable
+        run: echo "VITE_PROXY_URL=$VITE_PROXY_URL" >> .env.production
+        env:
+          VITE_PROXY_URL: ${{ secrets.VITE_PROXY_URL }}
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -29,6 +33,5 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          VITE_PROXY_URL: ${{ secrets.VITE_PROXY_URL }}
           AWS_REGION: 'ap-northeast-2'
           SOURCE_DIR: 'dist'
