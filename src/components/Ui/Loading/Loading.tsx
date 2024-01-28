@@ -16,7 +16,7 @@ const SpaceLoading = styled(Space)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 1.5rem auto;
 `;
 
 export default Loading;
