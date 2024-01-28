@@ -2,7 +2,7 @@
 
 상품 목록을 조회할 수 있는 페이지입니다.
 
-- [**`배포링크`**](https://natest-shop.vercel.app/)
+- [**`배포링크`**](https://natest.shop)
 
 <details>
 <summary>디렉터리 구조</summary>
