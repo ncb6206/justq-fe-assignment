@@ -16,8 +16,16 @@ const ProductList = () => {
 
   const fetchProductList = useCallback(
     async ({ pageParam }: { pageParam: number }) => {
-      console.log(pageParam);
-      return await GET({ type: 'data', pagesize, currentpage: pageParam });
+      const params = new URLSearchParams(location.search);
+      const value = params.get('query');
+
+      console.log(pageParam, value);
+      return await GET({
+        product: String(value),
+        type: 'data',
+        pagesize,
+        currentpage: pageParam,
+      });
     },
     [pagesize],
   );

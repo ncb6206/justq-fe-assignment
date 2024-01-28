@@ -27,9 +27,10 @@ const ProductListItem = ({ product }: IProductListItemProps) => {
             {product.brand && product.category4 && <span> | </span>}
             {product.category4 && <span>model : {product?.category4}</span>}
           </HeaderBadge>
-          <ProductName onClick={() => searchGoogle(product?.link)}>
-            {product?.title}
-          </ProductName>
+          <ProductName
+            onClick={() => searchGoogle(product?.link)}
+            dangerouslySetInnerHTML={{ __html: product?.title }}
+          />
         </DetailHeader>
         <DetailBottom>
           <PriceSpan>
@@ -86,7 +87,7 @@ const ProductListItemDetailDiv = styled.div`
 
 const DetailHeader = styled.div``;
 
-const ProductName = styled.span`
+const ProductName = styled.p`
   font-size: 1.5rem;
 
   &:hover {
