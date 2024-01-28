@@ -1,8 +1,14 @@
 import { IPageParams } from '../types/product';
 import instance from './config';
 
-export const GET = async ({ type, pagesize, currentpage }: IPageParams) => {
+export const GET = async ({
+  product,
+  type,
+  pagesize,
+  currentpage,
+}: IPageParams) => {
   try {
+    const actProduct = product ?? '';
     const actSize = pagesize ?? 0;
     const actPage = currentpage ?? 0;
 
@@ -11,7 +17,7 @@ export const GET = async ({ type, pagesize, currentpage }: IPageParams) => {
     if (import.meta.env.DEV) {
       response = await instance.get(`/v1/search/shop.json`, {
         params: {
-          query: '신발',
+          query: actProduct,
           display: actSize,
           start: actPage,
           sort: 'sim',
@@ -25,7 +31,7 @@ export const GET = async ({ type, pagesize, currentpage }: IPageParams) => {
     } else {
       response = await instance.get(import.meta.env.VITE_PROXY_URL, {
         params: {
-          query: '신발',
+          query: actProduct,
           display: actSize,
           start: actPage,
           sort: 'sim',

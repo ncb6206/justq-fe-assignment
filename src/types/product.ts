@@ -17,6 +17,7 @@ export interface IProductType {
 
 export interface IPageParams {
   type: 'length' | 'data';
+  product?: string;
   pagesize?: number;
   currentpage?: number;
 }
