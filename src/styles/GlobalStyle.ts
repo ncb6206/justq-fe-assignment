@@ -1,22 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-    a{
-        text-decoration: none;
-        color: inherit;
-    }
-    *{
+    * {
         box-sizing: border-box;
-    }
-    html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
-    a, dl, dt, dd, ol, ul, li, form, label, table{
         margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 10px;
-        vertical-align: baseline;
     }
-    body{
+
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         line-height: 1;
         font-family: 'Nanum Gothic', 'Noto Sans KR', sans-serif;
         background-color: #F4F3EA;
@@ -24,16 +17,40 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.5;
         font-weight: 400;
     }
-    ol, ul{
-        list-style: none;
+
+    h1 {
+        margin: 0;  
     }
-    button {
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        background-color: transparent;
         border: 0;
-        background: transparent;
+    }
+
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        box-shadow: none;
+    }
+
+    a,
+    button {
         cursor: pointer;
     }
-    html,body{
-        height: 100%;
+
+    ul,
+    ol {
+        padding: 0;
+        list-style: none;
     }
 `;
 

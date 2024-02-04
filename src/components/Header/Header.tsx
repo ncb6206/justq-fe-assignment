@@ -28,7 +28,7 @@ const SpanDiv = styled.div`
 const Span = styled.span`
   font-family: 'Montserrat', sans-serif;
   color: #ffffff;
-  font-size: 8rem;
+  font-size: 4rem;
   user-select: none;
 `;
 

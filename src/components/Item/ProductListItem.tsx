@@ -88,7 +88,7 @@ const ProductListItemDetailDiv = styled.div`
 const DetailHeader = styled.div``;
 
 const ProductName = styled.p`
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   &:hover {
     cursor: pointer;
@@ -101,7 +101,7 @@ const HeaderBadge = styled.div`
 
   span {
     color: #005078;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 `;
 
@@ -112,13 +112,13 @@ const DetailBottom = styled.div`
 `;
 
 const PriceSpan = styled.span`
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: #f54d3d;
   font-weight: 600;
 `;
 
 const CategorySpan = styled.span`
-  font-size: 1.3rem;
+  font-size: 0.9rem;
 `;
 
 export default ProductListItem;
