@@ -8,26 +8,26 @@ import { GET } from '../../service/products';
 import { IProductType } from '../../types/product';
 import ProductListItem from '../Item/ProductListItem';
 import usePageStore from '../../stores/pageStore';
+import useQueryStore from '../../stores/queryStore';
 import Loading from '../Ui/Loading/Loading';
 
-const ProductList = () => {
+const ProductListScroll = () => {
   const { pagesize } = usePageStore(state => state);
+  const { query } = useQueryStore(state => state);
   const { ref, inView } = useInView({ threshold: 0.5 });
 
   const fetchProductList = useCallback(
     async ({ pageParam }: { pageParam: number }) => {
-      const params = new URLSearchParams(location.search);
-      const value = params.get('query');
+      console.log(pageParam, query);
 
-      console.log(pageParam, value);
       return await GET({
-        product: String(value),
+        product: String(query),
         type: 'data',
         pagesize,
         currentpage: pageParam,
       });
     },
-    [pagesize],
+    [pagesize, query],
   );
 
   const {
@@ -39,7 +39,7 @@ const ProductList = () => {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['getProducts', pagesize],
+    queryKey: ['getProductsScroll', pagesize, query],
     queryFn: fetchProductList,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
@@ -120,4 +120,4 @@ const RefDiv = styled.div`
   height: 50px;
 `;
 
-export default ProductList;
+export default ProductListScroll;
