@@ -6,6 +6,8 @@ interface IPageState {
   currentpage: number;
   pagesize: number;
   pageArray: number[];
+  setListLength: (value: number) => void;
+  setCurrentPage: (value: number) => void;
   increasePage: () => void;
   decreasePage: () => void;
   goFirstPage: () => void;
@@ -20,6 +22,8 @@ const usePageStore = create<IPageState>(set => ({
   currentpage: 1,
   pagesize: 15,
   pageArray: [],
+  setListLength: value => set({ listLength: value }),
+  setCurrentPage: value => set({ currentpage: value }),
   increasePage: () =>
     set(state => {
       if (state.currentpage < state.pageLength) {
@@ -36,7 +40,7 @@ const usePageStore = create<IPageState>(set => ({
     }),
   goFirstPage: () => set({ currentpage: 1 }),
   goLastPage: () => set(state => ({ currentpage: state.pageLength })),
-  clickPage: (value: number) => set({ currentpage: value }),
+  clickPage: value => set({ currentpage: value }),
   generatePageNumbers: () =>
     set(state => {
       const pageRange = 2;

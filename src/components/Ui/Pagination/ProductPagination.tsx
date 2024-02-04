@@ -19,10 +19,10 @@ const ProductPagination = () => {
 
   const {
     listLength,
-    pageLength,
     currentpage,
     pagesize,
     pageArray,
+    setCurrentPage,
     increasePage,
     decreasePage,
     goFirstPage,
@@ -32,23 +32,24 @@ const ProductPagination = () => {
   } = usePageStore(state => state);
 
   useEffect(() => {
+    console.log(listLength);
     const calPageLength = Math.ceil(listLength / pagesize);
     usePageStore.setState({ pageLength: calPageLength });
 
     generatePageNumbers();
 
     if (currentpage && calPageLength && currentpage > calPageLength) {
-      usePageStore.setState({ currentpage: calPageLength });
+      setCurrentPage(calPageLength);
     }
-  }, [currentpage, pageLength, pagesize, listLength, generatePageNumbers]);
+  }, [currentpage, generatePageNumbers, listLength, pagesize, setCurrentPage]);
 
   useEffect(() => {
     if (!page || isNaN(Number(page))) return;
 
     if (Number(page) > 0) {
-      usePageStore.setState({ currentpage: Number(page) });
+      setCurrentPage(Number(page));
     }
-  }, [page]);
+  }, [page, setCurrentPage]);
 
   useEffect(() => {
     params.set('page', String(currentpage));
@@ -116,7 +117,7 @@ const PaginationButton = styled(Paginate)`
 `;
 
 const PaginationDiv = styled(Paginate)<IPaginationDivProps>`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   user-select: none;
 
