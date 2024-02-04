@@ -8,16 +8,19 @@ export const GET = async ({
   currentpage,
 }: IPageParams) => {
   try {
-    const actProduct = product ?? '';
+    if (!product) {
+      return null;
+    }
+
     const actSize = pagesize ?? 0;
-    const actPage = currentpage ?? 0;
+    const actPage = currentpage ?? 1;
 
     let response;
 
     if (import.meta.env.DEV) {
       response = await instance.get(`/v1/search/shop.json`, {
         params: {
-          query: actProduct,
+          query: product,
           display: actSize,
           start: actPage,
           sort: 'sim',
@@ -31,7 +34,7 @@ export const GET = async ({
     } else {
       response = await instance.get(import.meta.env.VITE_PROXY_URL, {
         params: {
-          query: actProduct,
+          query: product,
           display: actSize,
           start: actPage,
           sort: 'sim',
@@ -40,7 +43,7 @@ export const GET = async ({
       });
     }
 
-    if (type === 'length') return response.data.items.length;
+    if (type === 'length') return response.data.total;
 
     return response.data.items;
   } catch (error) {
