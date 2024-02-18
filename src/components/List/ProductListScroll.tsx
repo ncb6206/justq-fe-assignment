@@ -12,8 +12,8 @@ import useQueryStore from '../../stores/queryStore';
 import Loading from '../Ui/Loading/Loading';
 
 const ProductListScroll = () => {
-  const { pagesize } = usePageStore(state => state);
-  const { query } = useQueryStore(state => state);
+  const { pagesize } = usePageStore();
+  const { query } = useQueryStore();
   const { ref, inView } = useInView({ threshold: 0.5 });
 
   const fetchProductList = useCallback(

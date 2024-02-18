@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import styled, { css } from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   LeftOutlined,
@@ -7,8 +9,6 @@ import {
   DoubleRightOutlined,
 } from '@ant-design/icons';
 import usePageStore from '../../../stores/pageStore';
-import styled, { css } from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { IPaginationDivProps } from '../../../types/product';
 
 const ProductPagination = () => {
@@ -22,26 +22,33 @@ const ProductPagination = () => {
     currentpage,
     pagesize,
     pageArray,
+    setPageLength,
     setCurrentPage,
     increasePage,
     decreasePage,
     goFirstPage,
     goLastPage,
-    clickPage,
     generatePageNumbers,
-  } = usePageStore(state => state);
+  } = usePageStore();
 
   useEffect(() => {
     console.log(listLength);
     const calPageLength = Math.ceil(listLength / pagesize);
-    usePageStore.setState({ pageLength: calPageLength });
+    setPageLength(calPageLength);
 
     generatePageNumbers();
 
     if (currentpage && calPageLength && currentpage > calPageLength) {
       setCurrentPage(calPageLength);
     }
-  }, [currentpage, generatePageNumbers, listLength, pagesize, setCurrentPage]);
+  }, [
+    currentpage,
+    generatePageNumbers,
+    listLength,
+    pagesize,
+    setCurrentPage,
+    setPageLength,
+  ]);
 
   useEffect(() => {
     if (!page || isNaN(Number(page))) return;
@@ -71,7 +78,7 @@ const ProductPagination = () => {
       </PaginationButton>
       {pageArray.map(page => (
         <PaginationDiv
-          onClick={() => clickPage(page)}
+          onClick={() => setCurrentPage(page)}
           key={page}
           page={page}
           currentpage={currentpage}
@@ -133,7 +140,6 @@ const PaginationDiv = styled(Paginate)<IPaginationDivProps>`
 
       &:hover {
         color: #0073e9;
-        text-decoration: underline;
       }
     `}
 `;

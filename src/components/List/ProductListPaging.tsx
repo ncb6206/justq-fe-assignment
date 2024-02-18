@@ -10,8 +10,8 @@ import Loading from '../Ui/Loading/Loading';
 import useQueryStore from '../../stores/queryStore';
 
 const ProductListPaging = () => {
-  const { currentpage, pagesize } = usePageStore(state => state);
-  const { query } = useQueryStore(state => state);
+  const { currentpage, pagesize } = usePageStore();
+  const { query } = useQueryStore();
 
   const fetchProductList = useCallback(async () => {
     console.log(currentpage, query);

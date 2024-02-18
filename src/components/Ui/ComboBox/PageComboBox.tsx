@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { Select } from 'antd';
 
 import usePageStore from '../../../stores/pageStore';
-import styled from 'styled-components';
 
 const PageComboBox = () => {
   const navigate = useNavigate();
@@ -14,13 +14,13 @@ const PageComboBox = () => {
     () => pageSizes.map(value => ({ value: value, label: value })),
     [pageSizes],
   );
-  const pagesize = usePageStore(state => state.pagesize);
+  const { pagesize, setPageSize } = usePageStore();
 
   const onChangePagesize = (value: string) => {
     const params = new URLSearchParams(location.search);
     params.set('size', value);
 
-    usePageStore.setState({ pagesize: Number(value) });
+    setPageSize(Number(value));
     navigate(`?${params.toString()}`);
   };
 
@@ -34,14 +34,14 @@ const PageComboBox = () => {
     const size = params.get('size');
 
     if (!size || isNaN(Number(size))) {
-      usePageStore.setState({ pagesize: 15 });
+      setPageSize(15);
       return;
     }
 
     if (pageSizes.includes(size)) {
-      usePageStore.setState({ pagesize: Number(size) });
+      setPageSize(Number(size));
     }
-  }, [location.search, pageSizes]);
+  }, [location.search, pageSizes, setPageSize]);
 
   return (
     <>
