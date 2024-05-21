@@ -2,7 +2,7 @@
 
 상품 목록을 조회할 수 있는 페이지입니다.
 
-- [**`배포링크`**](https://natest.shop)
+- [**`배포링크`**](https://d2051jx7luzzhb.cloudfront.net)
 
 <details>
 <summary>디렉터리 구조</summary>
